@@ -1,5 +1,5 @@
 
 node_modules/
 
-// Datenbankdatei von lowdb
+# Datenbankdatei von lowdb
 db.json

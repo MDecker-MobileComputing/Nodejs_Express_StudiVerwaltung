@@ -11,6 +11,8 @@ const logger = logging.default("main");
 
 const app = express();
 
+app.use( express.static("public") );
+
 
 // Server starten
 const PORT_NUMMER = 8080;
