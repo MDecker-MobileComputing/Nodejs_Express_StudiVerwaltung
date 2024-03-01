@@ -11,10 +11,10 @@ const logger = logging.default("http-anfrage");
  * auf den Logger `request`.
  * <br><br>
  *
- * Beispiel-Zeile:
+ * Beispiel-Zeilen:
  * ```
- * POST /api/v1/studi/234567
- * GET  /api/v1/studi/123456
+ * 16:53:06.900 [http-anfrage] GET  /api/v1/sg/VWL
+ * 16:53:46.390 [http-anfrage] POST /api/v1/sg/
  * ```
  *
  * @param {*} req Request-Objekt, aus dem HTTP-Verb und Pfad gelesen werden
@@ -51,4 +51,4 @@ function mwCatchIllegalJson(err, req, res, next) {
 
 
 // Middleware-Funktionen als Array exportieren
-export default [ mwRequestLogger, mwCatchIllegalJson];
+export default [ mwRequestLogger, mwCatchIllegalJson ];
