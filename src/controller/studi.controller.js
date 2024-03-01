@@ -2,6 +2,10 @@ import logging from "logging";
 
 import { API_PREFIX } from "./konstanten.js";
 
+import studiService from "../services/studi.service.js";
+import { CUSTOM_HEADER_ANZAHL, CUSTOM_HEADER_FEHLER } from "./konstanten.js";
+import { HTTP_STATUS_CODES } from "./konstanten.js";
+
 const logger = logging.default("studi-controller");
 
 
@@ -64,6 +68,12 @@ function getResource(req, res) {
 }
 
 function getCollection(req, res) {
+
+    const alleStudis = studiService.getAlle();
+
+    res.status(HTTP_STATUS_CODES.OK_200);
+    res.header(CUSTOM_HEADER_ANZAHL, alleStudis.length)
+    res.json(alleStudis);
 }
 
 function postResource(req, res) {

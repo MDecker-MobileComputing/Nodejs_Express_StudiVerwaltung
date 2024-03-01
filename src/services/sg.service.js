@@ -15,7 +15,11 @@ const logger = logging.default("sg-service");
  */
 function getAlle() {
 
-    return datenbankObjekt.studiengangGetAlle();
+    const ergebnisArray = datenbankObjekt.studiengangGetAlle();
+
+    logger.info("Anzahl Studiengänge ausgelesen: " + ergebnisArray.length)
+
+    return ergebnisArray;
 }
 
 

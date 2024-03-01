@@ -1,11 +1,11 @@
 import logging from "logging";
 
-import { API_PREFIX, HTTP_STATUS_CODE_400_BAD_REQUEST } from "./konstanten.js";
-import { HTTP_STATUS_CODES  }                           from "./konstanten.js";
-import { CUSTOM_HEADER_ANZAHL, CUSTOM_HEADER_FEHLER }   from "./konstanten.js";
-
+import { API_PREFIX }                                 from "./konstanten.js";
+import { HTTP_STATUS_CODES  }                         from "./konstanten.js";
+import { CUSTOM_HEADER_ANZAHL, CUSTOM_HEADER_FEHLER } from "./konstanten.js";
 
 import sgService from "../services/sg.service.js";
+
 
 const logger = logging.default("sg-controller");
 
@@ -52,6 +52,11 @@ export default function routenRegistrieren(app) {
 // Namenskonvention für Funktionen, die HTTP-Requests verarbeiten:
 // [GET|POST|PUT|...][Ressource|Collection]
 
+
+/**
+ * Funktion für HTTP-GET-Request auf die Ressource
+ * (Suche einen Studiengang nach Kurzname als Pfadparameter).
+ */
 function getResource(req, res) {
 
     const kurzname = req.params.abk;
@@ -69,6 +74,7 @@ function getResource(req, res) {
         res.json( {} );
     }
 }
+
 
 /**
  * Funktion für HTTP-GET-Request auf die Collection

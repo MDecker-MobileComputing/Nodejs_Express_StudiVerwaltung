@@ -80,6 +80,27 @@ export async function initialisieren() {
 
 
 /**
+ * Alle Studierenden von Datenbank holen.
+ *
+ * @returns Array mit allen Studierenden, sortiert nach aufsteigenden
+ *          Matrikelnummer; wird nicht `null` oder `undefined` sein.
+ */
+export function studiGetAlle() {
+
+    if (datenbank.data && datenbank.data.studis) {
+
+        const sortFkt = (a, b) => a.matrikelnr - b.matrikelnr;
+
+        return datenbank.data.studis.sort(sortFkt);
+
+    } else {
+
+        return [];
+    }
+}
+
+
+/**
  * Alle Studiengänge von Datenbank holen.
  *
  * @returns Array mit allen Studiengängen;
@@ -118,7 +139,8 @@ export async function studiengangNeu(sgObjekt) {
  * Alle Funktionen mit Default-Objekt exportieren.
  */
 export default {
+
     initialisieren,
-    studiengangGetAlle,
-    studiengangNeu
- };
+    studiengangGetAlle, studiengangNeu,
+    studiGetAlle
+};
