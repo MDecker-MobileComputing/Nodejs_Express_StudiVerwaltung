@@ -62,7 +62,7 @@ let datenbank = null;
  * Initialisiert die Datenbank. Wenn die Datenbank-Datei nicht existiert,
  * wird sie mit den Anfangsdaten initialisiert.
  */
-export async function datenbankInitialisieren() {
+export async function initialisieren() {
 
     datenbank = await JSONFilePreset( dbDateiName, anfangsDaten );
 
@@ -83,7 +83,7 @@ export async function datenbankInitialisieren() {
  */
 export function getStudiengaengeAlle() {
 
-    if (datenbank && datenbank.data && datenbank.data.studiengaenge) {
+    if (datenbank.data && datenbank.data.studiengaenge) {
 
         return datenbank.data.studiengaenge.sort((a, b) => a.kurz.localeCompare(b.kurz));
 
@@ -92,3 +92,27 @@ export function getStudiengaengeAlle() {
         return [];
     }
 }
+
+
+/**
+ * Neuen Studiengang anlegen. Es muss sichergestellt sein,
+ * dass es nur keinen Studiengang mit dem gleichen Kurznamen
+ * gibt!
+ *
+ * @param {*} sgObjekt Objekt mit neuem Studiengang, muss
+ *            die Attribute `kurz` und `lang` enthalten.
+ */
+export async function studiengangNeu(sgObjekt) {
+
+    datenbank.data.studiengaenge.push(sgObjekt)
+    await datenbank.write();
+}
+
+/**
+ * Alle Funktionen mit Default-Objekt exportieren.
+ */
+export default {
+    initialisieren,
+    getStudiengaengeAlle,
+    studiengangNeu
+ };

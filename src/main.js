@@ -1,17 +1,16 @@
 import express from "express";
 import logging from "logging";
 
-import { datenbankInitialisieren } from "./datenbank.js";
-import { middlewareLogger }        from "./middleware/allgemein.middleware.js";
-
-import controllerArray from "./controller/index.js";
+import datenbankObjekt      from "./datenbank.js";
+import { middlewareLogger } from "./middleware/allgemein.middleware.js";
+import controllerArray      from "./controller/index.js";
 
 
 const logger = logging.default("main");
 
 const app = express();
 
-await datenbankInitialisieren();
+await datenbankObjekt.initialisieren();
 
 app.use( express.json() );
 app.use( express.static("public") );

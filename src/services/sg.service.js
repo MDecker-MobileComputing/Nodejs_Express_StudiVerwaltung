@@ -2,7 +2,7 @@
 
 import logging from "logging";
 
-import {getStudiengaengeAlle} from "../datenbank.js";
+import datenbankObjekt from "../datenbank.js";
 
 const logger = logging.default("sg-service");
 
@@ -15,7 +15,7 @@ const logger = logging.default("sg-service");
  */
 function getAlle() {
 
-    return getStudiengaengeAlle();
+    return datenbankObjekt.getStudiengaengeAlle();
 }
 
 
@@ -30,7 +30,7 @@ function getAlle() {
  */
 function suche(suchString) {
 
-    const alleArray = getStudiengaengeAlle();
+    const alleArray = datenbankObjekt.getStudiengaengeAlle();
 
     if (alleArray.length === 0) {
 
@@ -51,6 +51,7 @@ function suche(suchString) {
     return teilmengeArray;
 }
 
+
 /**
  * Studiengang anhand des Kurznamens zurückgeben.
  *
@@ -63,7 +64,7 @@ function getByKurzname(kurzname) {
 
     const kurznameLowerCase = kurzname.toLowerCase();
 
-    const alleArray = getStudiengaengeAlle();
+    const alleArray = datenbankObjekt.getStudiengaengeAlle();
 
     const filterFkt = (sg) => sg.kurz.toLowerCase() === kurznameLowerCase;
 
