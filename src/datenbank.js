@@ -56,23 +56,38 @@ const anfangsDaten =  {
 
 
 /* Objekt für Zugriff auf Datenbank. */
-let db = null;
+let datenbank = null;
 
+/**
+ * Initialisiert die Datenbank. Wenn die Datenbank-Datei nicht existiert,
+ * wird sie mit den Anfangsdaten initialisiert.
+ */
 export async function datenbankInitialisieren() {
 
-    db = await JSONFilePreset( dbDateiName, anfangsDaten );
+    datenbank = await JSONFilePreset( dbDateiName, anfangsDaten );
 
-    await db.write();
+    await datenbank.write();
 
     logger.info(`Datenbank mit Datei "${dbDateiName}" initialisiert.` );
-    logger.info(`Anzahl Studiengänge: ${db.data.studiengaenge.length}`);
-    logger.info(`Anzahl Studierende : ${db.data.studis.length}`       );
+    logger.info(`Anzahl Studiengänge: ${datenbank.data.studiengaenge.length}`);
+    logger.info(`Anzahl Studierende : ${datenbank.data.studis.length}`       );
 }
 
 
+/**
+ * Alle Studiengänge von Datenbank holen.
+ *
+ * @returns Array mit allen Studiengängen;
+ *          wird nicht `null` oder `undefined` sein.
+ */
+export function getStudiengaengeAlle() {
 
+    if (datenbank && datenbank.data && datenbank.data.studiengaenge) {
 
+        return datenbank.data.studiengaenge;
 
+    } else {
 
-
-
+        return [];
+    }
+}

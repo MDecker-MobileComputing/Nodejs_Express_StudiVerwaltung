@@ -14,6 +14,8 @@ const logger = logging.default("studi-controller");
  * aufgerufen werden soll.
  *
  * @param {*} Express-App-Objekt
+ *
+ * @return {number} Anzahl der registrierten REST-Endpunkte
  */
 export default function routenRegistrieren(app) {
 

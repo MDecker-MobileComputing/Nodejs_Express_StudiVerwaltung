@@ -6,12 +6,12 @@ import { middlewareLogger }        from "./middleware/allgemein.middleware.js";
 
 import controllerArray from "./controller/index.js";
 
-await datenbankInitialisieren();
-
 
 const logger = logging.default("main");
 
 const app = express();
+
+await datenbankInitialisieren();
 
 app.use( express.json() );
 app.use( express.static("public") );

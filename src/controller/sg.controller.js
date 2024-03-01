@@ -1,6 +1,8 @@
 import logging from "logging";
 
-import { API_PREFIX } from "./konstanten.js";
+import { API_PREFIX, HTTP_STATUS_CODE_200_OK } from "./konstanten.js";
+
+import sgService from "../services/sg.service.js";
 
 const logger = logging.default("sg-controller");
 
@@ -48,5 +50,17 @@ function getResource(req, res) {
 
 
 function getCollection(req, res) {
+
+    const suchString = req.query.q;
+
+    if (suchString) {
+
+    } else {
+
+        const alleArray = sgService.getAlle();
+
+        res.status(HTTP_STATUS_CODE_200_OK);
+        res.json( alleArray );
+    }
 }
 
