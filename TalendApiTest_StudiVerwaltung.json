@@ -36,7 +36,7 @@
               "path": "/api/v1/sg/"
             },
             "id": "428c6560-90c4-4e62-87f5-dfe516188f66",
-            "name": "GET Collection Studiengänge",
+            "name": "GET Collection SG",
             "headers": []
           }
         },
@@ -58,7 +58,89 @@
             "uri": {
               "query": {
                 "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "q",
+                    "value": "LEHRE"
+                  }
+                ]
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/sg/"
+            },
+            "id": "64c4832d-a05c-41de-9425-bcb37907a14e",
+            "name": "GET Collection SG Query \"LEHRE\"",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
                 "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "q",
+                    "value": "wein"
+                  }
+                ]
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/sg/"
+            },
+            "id": "1690e313-3899-4ced-a7af-b8e333a60e2c",
+            "name": "GET Collection SG Query \"gibt-es-nicht\"",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "q",
+                    "value": "wein"
+                  }
+                ]
               },
               "scheme": {
                 "name": "http",
@@ -68,7 +150,7 @@
               "path": "/api/v1/sg/"
             },
             "id": "8ad6553d-89a1-4853-b518-eb98b5b765c2",
-            "name": "GET Collection Studiengänge Query",
+            "name": "GET Collection SG Query \"wein\"",
             "headers": []
           }
         }

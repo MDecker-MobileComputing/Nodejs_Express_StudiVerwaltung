@@ -45,7 +45,7 @@ function suche(suchString) {
                 sg.lang.toLowerCase().includes(lowerCaseSuchString)
     );
 
-    logger.info(`Anzahl gefundener Studiengänge für Such-String "${suchString}":`+
+    logger.info(`Anzahl gefundener Studiengänge für Such-String "${suchString}": `+
                 teilmengeArray.length);
 
     return teilmengeArray;
