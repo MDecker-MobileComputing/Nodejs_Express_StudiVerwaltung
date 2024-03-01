@@ -25,6 +25,7 @@ function getAlle() {
 
 /**
  * Volltextsuche Studiengänge.
+ * Die Suche ist case-insensitive.
  *
  * @param {*} suchString Such-String, wird auf Kurz- und
  *                       Lang-Bezeichnung angewendet.
@@ -50,7 +51,7 @@ function suche(suchString) {
     );
 
     logger.info(`Anzahl gefundener Studiengänge für Such-String "${suchString}": `+
-                teilmengeArray.length);
+                 teilmengeArray.length);
 
     return teilmengeArray;
 }
@@ -116,6 +117,6 @@ async function neu(sgObjekt) {
 
 
 /**
- * Alle Funktionen als Objekt exportieren
+ * Alle Funktionen als Objekt exportieren.
  */
 export default { getAlle, suche, getByKurzname, neu };

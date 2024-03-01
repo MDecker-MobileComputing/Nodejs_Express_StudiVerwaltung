@@ -67,14 +67,40 @@ export default function routenRegistrieren(app) {
 function getResource(req, res) {
 }
 
+/**
+ * Funktion für GET-Request auf Studi-Collection.
+ * Kann Such-Parameter `q` auswerten.
+ */
 function getCollection(req, res) {
 
-    const alleStudis = studiService.getAlle();
+    let ergebnisArray = null;
 
-    res.status(HTTP_STATUS_CODES.OK_200);
-    res.header(CUSTOM_HEADER_ANZAHL, alleStudis.length)
-    res.json(alleStudis);
+    const suchString = req.query.q;
+    if (suchString) {
+
+        ergebnisArray = studiService.suche(suchString);
+
+    } else {
+
+        ergebnisArray = studiService.getAlle();
+    }
+
+    const anzahl = ergebnisArray.length;
+
+    res.setHeader(CUSTOM_HEADER_ANZAHL, anzahl);
+
+    if (anzahl === 0) {
+
+        res.status(HTTP_STATUS_CODES.NOT_FOUND_404);
+        res.json( [] );
+
+    } else {
+
+        res.status( HTTP_STATUS_CODES.OK_200 );
+        res.json( ergebnisArray );
+    }
 }
+
 
 function postResource(req, res) {
 }
