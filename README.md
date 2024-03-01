@@ -3,7 +3,7 @@
 |--------------------------|-----------------------------| :---: | :---:  | :---: | :---:   | :---:    |
 | Ressource  "Studiengang" | `/api/v1/sg/:abk`           | X     |        |       |         |          |
 | Collection "Studiengang" | `/api/v1/sg/`               | X     | X      |       |         |          |
-| Ressource  "Studi"       | `/api/v1/studi/:matrikelnr` | Y     |        |       |         |          |
+| Ressource  "Studi"       | `/api/v1/studi/:matrikelnr` | X     |        |       |         |          |
 | Collection "Studi"       | `/api/v1/studi/`            | X     |        |       |         |          |
 
 <br>
