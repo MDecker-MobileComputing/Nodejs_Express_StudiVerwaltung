@@ -1,8 +1,8 @@
 // Diese Datei enthält die Business-Logik für den Entitätstyp "Studiengang" (sg).
 
-import logging from "logging";
-
+import logging         from "logging";
 import datenbankObjekt from "../datenbank.js";
+
 
 const logger = logging.default("sg-service");
 
@@ -82,7 +82,36 @@ function getByKurzname(kurzname) {
     }
 }
 
+
+/**
+ * Neuen Studiengang anlegen.
+ *
+ * @param {*} sgObjekt Objekt mit `kurz` und `lang` als Attribute
+ * @returns `true`, wenn der Studiengang neu angelegt wurde, sonst `false`
+ *          (weil es schon einen Studiengang mit dem gleichen Kurznamen gibt).
+ */
+async function neu(sgObjekt) {
+
+    // Überprüfen, ob es schon einen Studiengang mit dem
+    // gleichen Kurznamen gibt.
+    const kurz = sgObjekt.kurz;
+    const sgObj = getByKurzname(kurz);
+    if (sgObj) {
+
+        logger.error(`Studiengang mit Kürzel "${kurz}" existiert bereits: ` +
+                     sgObj.lang);
+        return false;
+    }
+
+    await datenbankObjekt.studiengangNeu(sgObjekt);
+
+    logger.info(`Neuer Studiengang angelegt: ${sgObjekt.kurz} - ${sgObjekt.lang}`);
+
+    return true;
+}
+
+
 /**
  * Alle Funktionen als Objekt exportieren
  */
-export default { getAlle, suche, getByKurzname };
+export default { getAlle, suche, getByKurzname, neu };

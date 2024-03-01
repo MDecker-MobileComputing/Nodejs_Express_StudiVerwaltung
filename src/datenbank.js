@@ -113,6 +113,7 @@ export async function studiengangNeu(sgObjekt) {
     await datenbank.write();
 }
 
+
 /**
  * Alle Funktionen mit Default-Objekt exportieren.
  */

@@ -1,9 +1,9 @@
 import logging from "logging";
 
-import { API_PREFIX,
-         HTTP_STATUS_CODE_200_OK,
-         HTTP_STATUS_CODE_404_NOT_FOUND,
-         CUSTOM_HEADER_ANZAHL } from "./konstanten.js";
+import { API_PREFIX, HTTP_STATUS_CODE_400_BAD_REQUEST } from "./konstanten.js";
+import { HTTP_STATUS_CODES  }                           from "./konstanten.js";
+import { CUSTOM_HEADER_ANZAHL, CUSTOM_HEADER_FEHLER }   from "./konstanten.js";
+
 
 import sgService from "../services/sg.service.js";
 
@@ -41,6 +41,10 @@ export default function routenRegistrieren(app) {
     logger.info(`Route registriert: GET ${routeCollection}`);
     anzahlRestEndpunkte++;
 
+    app.post( routeCollection, postCollection );
+    logger.info(`Route registriert: POST ${routeCollection}`);
+    anzahlRestEndpunkte++;
+
     return anzahlRestEndpunkte;
 };
 
@@ -56,12 +60,12 @@ function getResource(req, res) {
 
     if(ergebnisObjekt) {
 
-        res.status( HTTP_STATUS_CODE_200_OK );
+        res.status( HTTP_STATUS_CODES.OK_200 );
         res.json( ergebnisObjekt );
 
     } else {
 
-        res.status( HTTP_STATUS_CODE_404_NOT_FOUND );
+        res.status( HTTP_STATUS_CODES.NOT_FOUND_404 );
         res.json( {} );
     }
 }
@@ -90,13 +94,58 @@ function getCollection(req, res) {
 
     if (anzahl === 0) {
 
-            res.status(HTTP_STATUS_CODE_404_NOT_FOUND);
+            res.status(HTTP_STATUS_CODES.NOT_FOUND_404);
             res.json( [] );
 
     } else {
 
-            res.status( HTTP_STATUS_CODE_200_OK );
+            res.status( HTTP_STATUS_CODES.OK_200 );
             res.json( ergebnisArray );
+    }
+}
+
+
+/**
+ * Funktion für HTTP-POST-Request auf die Collection, um
+ * neuen Studiengang anzulegen.
+ */
+async function postCollection(req, res) {
+
+    let kurzName = req.body.kurz;
+    let langName = req.body.lang;
+
+    if (kurzName === undefined || kurzName.trim() === "" ) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'kurz' fehlt oder ist leer.");
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+        return;
+    }
+
+    if (langName === undefined || langName.trim() === "" ) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'lang' fehlt oder ist leer.");
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+        return;
+    }
+
+    // In neues Objekt umwandeln, damit evtl. überflüssige Attribute
+    // entfernt werden; außerdem werden die Werte normalisiert.
+    const neuesObjekt = { kurz: kurzName.trim().toUpperCase(),
+                          lang: langName.trim() };
+
+    const erfolgreich = await sgService.neu(neuesObjekt);
+    if (erfolgreich) {
+
+        res.status( HTTP_STATUS_CODES.CREATED_201 );
+        res.json( neuesObjekt );
+
+    } else {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Studienrichtung mit diesem Kurznamen existierte bereits.");
+        res.status( HTTP_STATUS_CODES.CONFLICT_409 );
+        res.json( {} );
     }
 }
 
