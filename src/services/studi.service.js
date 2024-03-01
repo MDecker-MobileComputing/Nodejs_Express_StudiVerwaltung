@@ -27,6 +27,7 @@ function getAlle() {
     return ergArray;
 }
 
+
 /**
  * Sucht nach Studis anhand Such-String in Vor- oder Nachname.
  * Die Suche ist case-insensitive.
@@ -60,6 +61,33 @@ function suche(suchString) {
 
 
 /**
+ * Suche nach Studi anhand Matrikelnummer.
+ *
+ * @param {nuber} matrikelnr Matrikelnummer (Integer).
+ *
+ * @returns Studi-Objekt oder `null`, wenn nicht gefunden.
+ */
+function getByMatrikelnr(matrikelnr) {
+
+    const alleArray = datenbankObjekt.studiGetAlle();
+
+    const foundStudi = alleArray.find(studi => studi.matrikelnr === matrikelnr);
+
+    if (foundStudi) {
+
+        logger.info(`Studi mit Matrikelnr "${matrikelnr}" gefunden: `+
+                    `${foundStudi.vorname} ${foundStudi.nachname}`);
+        return foundStudi;
+
+    } else {
+
+        logger.info(`Kein Studi mit Matrikelnr "${matrikelnr}" gefunden.`);
+        return null;
+    }
+}
+
+
+/**
  * Alle Funktionen als Objekt exportieren.
  */
-export default { getAlle, suche };
+export default { getAlle, suche, getByMatrikelnr };

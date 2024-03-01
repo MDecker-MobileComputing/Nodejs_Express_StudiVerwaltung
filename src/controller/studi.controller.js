@@ -63,8 +63,38 @@ export default function routenRegistrieren(app) {
 // Namenskonvention für Funktionen, die HTTP-Requests verarbeiten:
 // [GET|POST|PUT|...][Ressource|Collection]
 
-
+/**
+ * Funktion HTTP-GET-Request auf eine Ressource mit Matrikelnr
+ * als Pfadparameter
+ */
 function getResource(req, res) {
+
+    const matrikenrStr = req.params.matrikelnr;
+
+    // versuche, die matrikelnummer zu parsen
+    let matrikelnrInt = parseInt(matrikenrStr);
+
+    if ( isNaN(matrikelnrInt) ) {
+
+        logger.error(`Pfadparameterwert "${matrikenrStr}" konnte nicht nach Int geparst werden.`);
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Matrikelnummer muss eine Zahl sein.");
+        res.status(HTTP_STATUS_CODES.BAD_REQUEST_400);
+        res.json({});
+        return;
+    }
+
+    const ergebnisObjekt = studiService.getByMatrikelnr(matrikelnrInt);
+
+    if(ergebnisObjekt) {
+
+        res.status( HTTP_STATUS_CODES.OK_200 );
+        res.json( ergebnisObjekt );
+
+    } else {
+
+        res.status( HTTP_STATUS_CODES.NOT_FOUND_404 );
+        res.json( {} );
+    }
 }
 
 /**
