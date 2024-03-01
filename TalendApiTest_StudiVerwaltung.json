@@ -39,6 +39,38 @@
             "name": "GET Collection Studiengänge",
             "headers": []
           }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/sgang/"
+            },
+            "id": "8ad6553d-89a1-4853-b518-eb98b5b765c2",
+            "name": "GET Collection Studiengänge Query",
+            "headers": []
+          }
         }
       ]
     }
