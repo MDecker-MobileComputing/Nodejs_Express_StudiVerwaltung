@@ -2,6 +2,8 @@ import logging from "logging";
 
 const logger = logging.default("http-anfrage");
 
+// Namenskonvention:
+// alle Middleware-Funktionen in dieser Datei beginnen mit `mw`
 
 /**
  * Diese Middleware-Funktion schreibt für jeden HTTP-Request eine Zeile
@@ -21,9 +23,32 @@ const logger = logging.default("http-anfrage");
  *
  * @param {*} next Funktion, um nächste Middleware-Funktion aufzurufen
  */
-export function middlewareLogger(req, res, next) {
+function mwRequestLogger(req, res, next) {
 
     logger.info(`${req.method} ${req.originalUrl}`);
 
     next();
 };
+
+
+/**
+ * Diese Middleware-Funktion fängt SyntaxError-Objekte ab, die von
+ * `express.json()` geworfen werden, wenn der Body eines HTTP-Requests
+ * (z.B. HTTP-POST) kein gültiges JSON enthält.
+ */
+function mwCatchIllegalJson(err, req, res, next) {
+
+    if (err instanceof SyntaxError) {
+
+        logger.error("Illegal JSON in HTTP-Request.");
+        res.status(400).send("Bad Request: Invalid JSON");
+
+    } else {
+
+        next();
+    }
+}
+
+
+// Middleware-Funktionen als Array exportieren
+export default [ mwRequestLogger, mwCatchIllegalJson];

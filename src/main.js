@@ -1,9 +1,9 @@
 import express from "express";
 import logging from "logging";
 
-import datenbankObjekt      from "./datenbank.js";
-import { middlewareLogger } from "./middleware/allgemein.middleware.js";
-import controllerArray      from "./controller/index.js";
+import datenbankObjekt  from "./datenbank.js";
+import controllerArray  from "./controller/index.js";
+import middlewareArray  from "./middleware/allgemein.middleware.js";
 
 
 const logger = logging.default("main");
@@ -14,7 +14,7 @@ await datenbankObjekt.initialisieren();
 
 app.use( express.json() );
 app.use( express.static("public") );
-app.use( middlewareLogger );
+app.use( middlewareArray );
 
 // Default-Funktion zum Registrieren von Routen für
 // alle Controller aufrufen
