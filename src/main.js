@@ -19,9 +19,11 @@ app.use( middlewareLogger );
 
 // Default-Funktion zum Registrieren von Routen für
 // alle Controller aufrufen
+let anzahlRestEndpunkte = 0;
 for (const controller of controllerArray) {
-    controller(app);
+    anzahlRestEndpunkte += controller(app);
 }
+logger.info(`Anzahl registrierter REST-Endpunkte: ${anzahlRestEndpunkte}\n`);
 
 // Server starten
 const PORT_NUMMER = 8080;

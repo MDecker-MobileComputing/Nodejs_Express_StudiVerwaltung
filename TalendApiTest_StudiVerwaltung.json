@@ -33,7 +33,7 @@
                 "version": "V11"
               },
               "host": "localhost:8080",
-              "path": "/api/v1/sgang/"
+              "path": "/api/v1/sg/"
             },
             "id": "428c6560-90c4-4e62-87f5-dfe516188f66",
             "name": "GET Collection Studiengänge",
@@ -65,7 +65,7 @@
                 "version": "V11"
               },
               "host": "localhost:8080",
-              "path": "/api/v1/sgang/"
+              "path": "/api/v1/sg/"
             },
             "id": "8ad6553d-89a1-4853-b518-eb98b5b765c2",
             "name": "GET Collection Studiengänge Query",
