@@ -2,7 +2,7 @@ import express from "express";
 import logging from "logging";
 
 import { datenbankInitialisieren } from "./datenbank.js";
-
+import { middlewareLogger }        from "./middleware/allgemein.middleware.js";
 
 await datenbankInitialisieren();
 
@@ -11,7 +11,9 @@ const logger = logging.default("main");
 
 const app = express();
 
+app.use( express.json() );
 app.use( express.static("public") );
+app.use( middlewareLogger );
 
 
 // Server starten

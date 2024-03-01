@@ -1,0 +1,46 @@
+{
+  "version": 6,
+  "entities": [
+    {
+      "entity": {
+        "type": "Project",
+        "id": "266d0598-7440-439c-9e4f-a82748f9f7bb",
+        "name": "Studiverwaltung"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/sgang/"
+            },
+            "id": "428c6560-90c4-4e62-87f5-dfe516188f66",
+            "name": "GET Collection Studiengänge",
+            "headers": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -15,9 +15,12 @@ const anfangsDaten =  {
        },{
         "kurz": "WING",
         "lang": "Wirtschaftsingenieurwesen"
-        },{
+       },{
         "kurz": "WINF",
         "lang": "Wirtschaftsinformatik"
+       },{
+        "kurz": "INFO",
+        "lang": "Informatik"
        },{
         "kurz": "IWMM",
         "lang": "Irgendwas mit Medien"
@@ -34,6 +37,20 @@ const anfangsDaten =  {
         "kurz": "LUD",
         "lang": "Ludologie"
        }
+    ],
+
+    "studis": [
+        {
+            "matrikelnr": 123456,
+            "vorname": "Hans",
+            "nachname": "Wiwi",
+            "studiengang": "BWL"
+        },{
+            "matrikelnr": 234567,
+            "vorname": "Nina",
+            "nachname": "Info",
+            "studiengang": "INFO"
+        }
     ]
 };
 
@@ -46,8 +63,10 @@ export async function datenbankInitialisieren() {
     db = await JSONFilePreset( dbDateiName, anfangsDaten );
 
     await db.write();
-    logger.info(`Datenbank mit Datei "${dbDateiName}" initialisiert.`);
+
+    logger.info(`Datenbank mit Datei "${dbDateiName}" initialisiert.` );
     logger.info(`Anzahl Studiengänge: ${db.data.studiengaenge.length}`);
+    logger.info(`Anzahl Studierende : ${db.data.studis.length}`       );
 }
 
 
