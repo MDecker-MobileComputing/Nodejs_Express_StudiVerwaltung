@@ -2,6 +2,7 @@ name: Node.js Code Check
 on:
   push:
     branches: [ master ]
+  workflow_dispatch: # Button für manuelles Auslösen der Pipeline
 jobs:
   build:
     runs-on: ubuntu-latest
