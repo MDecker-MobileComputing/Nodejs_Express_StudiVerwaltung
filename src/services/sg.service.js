@@ -38,11 +38,11 @@ function suche(suchString) {
         return [];
     }
 
-    let lowerCaseSuchString = suchString.toLowerCase();
+    const suchStringLowerCase = suchString.toLowerCase();
 
     const teilmengeArray =  alleArray.filter(
-        (sg) => sg.kurz.toLowerCase().includes(lowerCaseSuchString) ||
-                sg.lang.toLowerCase().includes(lowerCaseSuchString)
+        (sg) => sg.kurz.toLowerCase().includes(suchStringLowerCase) ||
+                sg.lang.toLowerCase().includes(suchStringLowerCase)
     );
 
     logger.info(`Anzahl gefundener Studiengänge für Such-String "${suchString}": `+
@@ -52,6 +52,36 @@ function suche(suchString) {
 }
 
 /**
+ * Studiengang anhand des Kurznamens zurückgeben.
+ *
+ * @param {string} kurzname Kurzname des Studiengangs, z.B. "VWL"
+ *
+ * @return Studiengangsobjekt oder `null`, wenn
+ *         kein Studiengang mit dem Kurznamen gefunden wurde.
+ */
+function getByKurzname(kurzname) {
+
+    const kurznameLowerCase = kurzname.toLowerCase();
+
+    const alleArray = getStudiengaengeAlle();
+
+    const filterFkt = (sg) => sg.kurz.toLowerCase() === kurznameLowerCase;
+
+    const ergArray = alleArray.filter( filterFkt );
+
+    if (ergArray.length === 0) {
+
+        logger.warn(`Kein Studiengang mit Kurzname "${kurzname}" gefunden.`);
+        return null;
+
+    } else {
+
+        logger.info(`Studiengang mit Kurzname "${kurzname}" gefunden.`);
+        return ergArray[0];
+    }
+}
+
+/**
  * Alle Funktionen als Objekt exportieren
  */
-export default { getAlle, suche };
+export default { getAlle, suche, getByKurzname };

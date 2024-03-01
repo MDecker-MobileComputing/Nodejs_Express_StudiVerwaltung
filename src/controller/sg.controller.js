@@ -49,6 +49,21 @@ export default function routenRegistrieren(app) {
 // [GET|POST|PUT|...][Ressource|Collection]
 
 function getResource(req, res) {
+
+    const kurzname = req.params.abk;
+
+    const ergebnisObjekt = sgService.getByKurzname(kurzname);
+
+    if(ergebnisObjekt) {
+
+        res.status( HTTP_STATUS_CODE_200_OK );
+        res.json( ergebnisObjekt );
+
+    } else {
+
+        res.status( HTTP_STATUS_CODE_404_NOT_FOUND );
+        res.json( {} );
+    }
 }
 
 /**

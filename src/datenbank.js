@@ -78,13 +78,14 @@ export async function datenbankInitialisieren() {
  * Alle Studiengänge von Datenbank holen.
  *
  * @returns Array mit allen Studiengängen;
- *          wird nicht `null` oder `undefined` sein.
+ *          wird nicht `null` oder `undefined` sein;
+ *          alphabetisch sortiert nach `kurz`.
  */
 export function getStudiengaengeAlle() {
 
     if (datenbank && datenbank.data && datenbank.data.studiengaenge) {
 
-        return datenbank.data.studiengaenge;
+        return datenbank.data.studiengaenge.sort((a, b) => a.kurz.localeCompare(b.kurz));
 
     } else {
 
