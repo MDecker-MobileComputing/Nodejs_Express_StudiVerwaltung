@@ -15,7 +15,7 @@ const logger = logging.default("sg-service");
  */
 function getAlle() {
 
-    return datenbankObjekt.getStudiengaengeAlle();
+    return datenbankObjekt.studiengangGetAlle();
 }
 
 
@@ -30,7 +30,7 @@ function getAlle() {
  */
 function suche(suchString) {
 
-    const alleArray = datenbankObjekt.getStudiengaengeAlle();
+    const alleArray = datenbankObjekt.studiengangGetAlle();
 
     if (alleArray.length === 0) {
 
@@ -64,7 +64,7 @@ function getByKurzname(kurzname) {
 
     const kurznameLowerCase = kurzname.toLowerCase();
 
-    const alleArray = datenbankObjekt.getStudiengaengeAlle();
+    const alleArray = datenbankObjekt.studiengangGetAlle();
 
     const filterFkt = (sg) => sg.kurz.toLowerCase() === kurznameLowerCase;
 

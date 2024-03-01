@@ -74,6 +74,11 @@ export async function initialisieren() {
 }
 
 
+// Namenskonvention: Alle Funktionen für den Zugriff auf die Datenbank
+//                   müssen mit dem Namen des Entitätstyps beginnen,
+//                   also entweder "studiengang..." oder "studi...".
+
+
 /**
  * Alle Studiengänge von Datenbank holen.
  *
@@ -81,7 +86,7 @@ export async function initialisieren() {
  *          wird nicht `null` oder `undefined` sein;
  *          alphabetisch sortiert nach `kurz`.
  */
-export function getStudiengaengeAlle() {
+export function studiengangGetAlle() {
 
     if (datenbank.data && datenbank.data.studiengaenge) {
 
@@ -113,6 +118,6 @@ export async function studiengangNeu(sgObjekt) {
  */
 export default {
     initialisieren,
-    getStudiengaengeAlle,
+    studiengangGetAlle,
     studiengangNeu
  };
