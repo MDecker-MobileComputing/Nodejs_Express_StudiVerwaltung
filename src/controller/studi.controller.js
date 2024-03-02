@@ -40,19 +40,19 @@ export default function routenRegistrieren(app) {
     logger.info(`Route registriert: GET ${routeCollection}`);
     anzahlRestEndpunkte++;
 
-    app.post( routeRessource, postResource );
+    app.post( routeCollection, postCollection );
     logger.info(`Route registriert: POST ${routeCollection}`);
     anzahlRestEndpunkte++;
 
-    app.post( routeRessource, deleteResource );
+    app.delete( routeCollection, deleteResource );
     logger.info(`Route registriert: DELETE ${routeCollection}`);
     anzahlRestEndpunkte++;
 
-    app.put( routeRessource, putResource );
+    app.put( routeCollection, putResource );
     logger.info(`Route registriert: PUT ${routeCollection}`);
     anzahlRestEndpunkte++;
 
-    app.put( routeRessource, patchResource );
+    app.patch( routeCollection, patchResource );
     logger.info(`Route registriert: PATCH ${routeCollection}`);
     anzahlRestEndpunkte++;
 
@@ -97,6 +97,7 @@ function getResource(req, res) {
     }
 }
 
+
 /**
  * Funktion für GET-Request auf Studi-Collection.
  * Kann Such-Parameter `q` auswerten.
@@ -131,9 +132,73 @@ function getCollection(req, res) {
     }
 }
 
+/**
+ * Neuen Studi anlegen.
+ */
+async function postCollection(req, res) {
 
-function postResource(req, res) {
+    const matrikelnr  = req.body.matrikelnr;
+    const vorname     = req.body.vorname;
+    const nachname    = req.body.nachname;
+    const studiengang = req.body.studiengang;
+
+    if (matrikelnr === undefined) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'matrikelnr' fehlt.");
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+        return;
+    }
+
+    if (vorname === undefined || vorname.trim() === "" ) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'vorname' fehlt oder ist leer");
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+        return;
+    }
+
+    if (nachname === undefined || nachname.trim() === "" ) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'nachname' fehlt oder ist leer");
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+        return;
+    }
+
+    if (studiengang === undefined || studiengang.trim() === "" ) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'studiengang' fehlt oder ist leer");
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+        return;
+    }
+
+    // In neues Objekt umwandeln, damit evtl. überflüssige Attribute
+    // entfernt werden; außerdem werden die Werte normalisiert.
+    const neuerStudi = {
+
+        matrikelnr : matrikelnr,
+        vorname    : vorname.trim(),
+        nachname   : nachname.trim(),
+        studiengang: studiengang.trim().toUpperCase()
+    };
+
+    const fehlerMeldung = await studiService.neu(neuerStudi);
+
+    if (fehlerMeldung === "") {
+
+        res.status( HTTP_STATUS_CODES.CREATED_201 );
+        res.json( neuerStudi );
+
+    } else {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, fehlerMeldung);
+        res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
+        res.json( {} );
+    }
 }
+
 
 function deleteResource(req, res) {
 }

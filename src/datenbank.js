@@ -139,11 +139,27 @@ async function studiengangNeu(sgObjekt) {
 
 
 /**
+ * Neuen Studierenden anlegen. Es muss sichergestellt sein,
+ * dass es nur keinen Studierenden mit der gleichen Matrikelnummer
+ * gibt!
+ *
+ * @param {*} studiObjekt Objekt mit neuem Studierenden, muss
+ *                        die Attribute `matrikelnr`, `vorname`,
+ *                        `nachname` und `studiengang` enthalten.
+ */
+async function studiNeu(studiObjekt) {
+
+    datenbank.data.studis.push(studiObjekt)
+    await datenbank.write();
+}
+
+
+/**
  * Alle Funktionen mit Default-Objekt exportieren.
  */
 export default {
 
     initialisieren,
     studiengangGetAlle, studiengangNeu,
-    studiGetAlle
+    studiGetAlle, studiNeu
 };

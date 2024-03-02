@@ -117,10 +117,10 @@ function getCollection(req, res) {
  */
 async function postCollection(req, res) {
 
-    let kurzName = req.body.kurz;
-    let langName = req.body.lang;
+    const kurzName = req.body.kurz;
+    const langName = req.body.lang;
 
-    if (kurzName === undefined || kurzName.trim() === "" ) {
+    if (kurzName === undefined || kurzName.trim() === "") {
 
         res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'kurz' fehlt oder ist leer.");
         res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );
@@ -128,7 +128,7 @@ async function postCollection(req, res) {
         return;
     }
 
-    if (langName === undefined || langName.trim() === "" ) {
+    if (langName === undefined || langName.trim() === "") {
 
         res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'lang' fehlt oder ist leer.");
         res.status( HTTP_STATUS_CODES.BAD_REQUEST_400 );

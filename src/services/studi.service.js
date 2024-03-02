@@ -1,5 +1,6 @@
 import logging         from "logging";
 import datenbankObjekt from "../datenbank.js";
+import sgService       from "./sg.service.js";
 
 
 const logger = logging.default("studi-service");
@@ -88,6 +89,49 @@ function getByMatrikelnr(matrikelnr) {
 
 
 /**
+ * Neuen Studi anlegen. Es muss sichergestellt sein, dass `studiObjekt`
+ * die Attribute `matrikelnr`, `vorname`, `nachname` sowie `studiengang`
+ * enthält.
+ *
+ * @return String mit Fehlermeldung; ist leer, wenn kein Fehler aufgetreten
+ *         ist, der Student also erfolgreich angelegt wurde.
+ */
+async function neu(studiObjekt) {
+
+    const matrikelnr = studiObjekt.matrikelnr;
+
+    if ( !Number.isInteger(matrikelnr) ) {
+
+        return "Matrikelnummer ist keine ganze Zahl (Integer).";
+    }
+
+    const studiGefunden = getByMatrikelnr(matrikelnr);
+    if (studiGefunden) {
+
+        return `Studi mit Matrikelnummer ${matrikelnr} existiert bereits: ` +
+               `${studiGefunden.vorname} ${studiGefunden.nachname}`;
+    }
+
+    // check if studiengang ist existing
+    const sgKurz = studiObjekt.studiengang;
+
+    const sgObjekt = sgService.getByKurzname(sgKurz);
+    if (!sgObjekt) {
+
+        return `Studi mit unbekanntem Studiengang "${sgKurz}" kann nicht angelegt werden.`;
+    }
+
+    // eigentliches Anlegen neuer Studi
+    await datenbankObjekt.studiNeu(studiObjekt);
+
+    logger.info(`Neuer Studi angelegt: ${studiObjekt.matrikelnr} - ` +
+                `${studiObjekt.vorname} ${studiObjekt.nachname} - ${sgKurz}`);
+
+    return "";
+}
+
+
+/**
  * Alle Funktionen als Objekt exportieren.
  */
-export default { getAlle, suche, getByMatrikelnr };
+export default { getAlle, suche, getByMatrikelnr, neu };
