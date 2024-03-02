@@ -12,14 +12,17 @@ const app = express();
 
 await datenbankObjekt.initialisieren();
 
+
 app.use( express.json() );
 app.use( express.static("public") );
 app.use( middlewareArray );
+
 
 // Default-Funktion zum Registrieren von Routen für
 // alle Controller aufrufen
 let anzahlRestEndpunkte = 0;
 for (const controller of controllerArray) {
+
     anzahlRestEndpunkte += controller(app);
 }
 logger.info(`Anzahl registrierter REST-Endpunkte: ${anzahlRestEndpunkte}\n`);

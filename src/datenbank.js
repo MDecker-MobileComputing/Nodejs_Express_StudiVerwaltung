@@ -58,17 +58,18 @@ const anfangsDaten =  {
 /* Objekt für Zugriff auf Datenbank. */
 let datenbank = null;
 
+
 /**
  * Initialisiert die Datenbank. Wenn die Datenbank-Datei nicht existiert,
  * wird sie mit den Anfangsdaten initialisiert.
  */
-export async function initialisieren() {
+async function initialisieren() {
 
     datenbank = await JSONFilePreset( dbDateiName, anfangsDaten );
 
     await datenbank.write();
 
-    logger.info(`Datenbank mit Datei "${dbDateiName}" initialisiert.` );
+    logger.info(`Datenbank mit Datei "${dbDateiName}" initialisiert.`        );
     logger.info(`Anzahl Studiengänge: ${datenbank.data.studiengaenge.length}`);
     logger.info(`Anzahl Studierende : ${datenbank.data.studis.length}`       );
 }
@@ -85,7 +86,7 @@ export async function initialisieren() {
  * @returns Array mit allen Studierenden, sortiert nach aufsteigenden
  *          Matrikelnummer; wird nicht `null` oder `undefined` sein.
  */
-export function studiGetAlle() {
+function studiGetAlle() {
 
     if (datenbank.data && datenbank.data.studis) {
 
@@ -107,11 +108,13 @@ export function studiGetAlle() {
  *          wird nicht `null` oder `undefined` sein;
  *          alphabetisch sortiert nach `kurz`.
  */
-export function studiengangGetAlle() {
+function studiengangGetAlle() {
 
     if (datenbank.data && datenbank.data.studiengaenge) {
 
-        return datenbank.data.studiengaenge.sort((a, b) => a.kurz.localeCompare(b.kurz));
+        const sortFkt = (a, b) => a.kurz.localeCompare(b.kurz)
+
+        return datenbank.data.studiengaenge.sort( sortFkt );
 
     } else {
 
@@ -128,7 +131,7 @@ export function studiengangGetAlle() {
  * @param {*} sgObjekt Objekt mit neuem Studiengang, muss
  *            die Attribute `kurz` und `lang` enthalten.
  */
-export async function studiengangNeu(sgObjekt) {
+async function studiengangNeu(sgObjekt) {
 
     datenbank.data.studiengaenge.push(sgObjekt)
     await datenbank.write();
