@@ -4,7 +4,7 @@
     {
       "entity": {
         "type": "Project",
-        "id": "266d0598-7440-439c-9e4f-a82748f9f7bb",
+        "id": "f9432160-3baa-4774-821e-e410589541db",
         "name": "Studiverwaltung"
       },
       "children": [
@@ -35,7 +35,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "428c6560-90c4-4e62-87f5-dfe516188f66",
+            "id": "392ac612-d76b-440c-880c-36c1a3336508",
             "name": "GET Collection SG",
             "headers": []
           }
@@ -73,7 +73,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "64c4832d-a05c-41de-9425-bcb37907a14e",
+            "id": "67cab950-bd7c-403a-b90d-af4d9a312d07",
             "name": "GET Collection SG Query \"LEHRE\"",
             "headers": []
           }
@@ -111,7 +111,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "b4f022a0-2735-4e32-b107-c29229961fe5",
+            "id": "7b2cfcb1-0d3f-47fd-8256-1ad655ebee75",
             "name": "GET Collection SG Query \"WL\"",
             "headers": []
           }
@@ -149,7 +149,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "1690e313-3899-4ced-a7af-b8e333a60e2c",
+            "id": "a772aba8-233b-42ae-8410-de0c7efb7a44",
             "name": "GET Collection SG Query \"gibt-es-nicht\"",
             "headers": []
           }
@@ -187,7 +187,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "8ad6553d-89a1-4853-b518-eb98b5b765c2",
+            "id": "15bd34de-6c1f-43a9-ae11-95a6fcc55b6f",
             "name": "GET Collection SG Query \"wein\"",
             "headers": []
           }
@@ -217,9 +217,9 @@
                 "version": "V11"
               },
               "host": "localhost:8080",
-              "path": "/api/v1/sg/"
+              "path": "/api/v1/studi/"
             },
-            "id": "a9ad2f62-582a-46ed-af8d-a9bad9e0d413",
+            "id": "11b3d98e-e63e-4588-99f6-05b9cbaff6b2",
             "name": "GET Collection Studi",
             "headers": []
           }
@@ -257,7 +257,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/studi/"
             },
-            "id": "483c5d3a-c921-498f-8f5a-e14b9372ba7b",
+            "id": "3a2bf4e3-71db-4e08-b7ae-ea89c47a0138",
             "name": "GET Collection Studi Query \"hans\"",
             "headers": []
           }
@@ -289,7 +289,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/studi/asdf"
             },
-            "id": "7f06d2e2-5c99-4ccc-a43a-d6c6567eb685",
+            "id": "7b64d5fe-abd7-493a-8d2b-152f855131c2",
             "name": "GET Collection Studi Query 123456",
             "headers": []
           }
@@ -321,7 +321,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/ABC"
             },
-            "id": "91c841c2-bed2-467e-941f-06c0874b9368",
+            "id": "259b0e46-31fd-4dac-8c96-f41eb7369da7",
             "name": "GET Ressource SG \"ABC\"",
             "headers": []
           }
@@ -353,7 +353,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/VWL"
             },
-            "id": "37bf153e-2630-4d93-981c-a83aba615548",
+            "id": "75d58eae-fe68-4b97-83a3-a0e68183012a",
             "name": "GET Ressource SG \"VWL\"",
             "headers": []
           }
@@ -385,7 +385,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "ec0dd52f-59d6-41f7-bcce-e4b7d155aa62",
+            "id": "ecc7c569-c25b-4d18-9a43-9f368ed9ff3d",
             "name": "OPTIONS Collection SG",
             "headers": []
           }
@@ -419,7 +419,7 @@
               "host": "localhost:8080",
               "path": "/api/v1/sg/"
             },
-            "id": "1dd0b691-901e-48db-bd2a-41631cb6fe79",
+            "id": "1e0266ad-c0ef-4dca-94e0-d03969db3349",
             "name": "POST Collection SG \"MATH\"",
             "headers": [
               {
@@ -458,9 +458,49 @@
               "host": "localhost:8080",
               "path": "/api/v1/studi/"
             },
-            "id": "f3150524-c2fe-45f1-8ef1-fd5d2e0f24de",
+            "id": "0dfd1345-07c0-4732-8904-62d1be55f170",
             "name": "POST Collection SG \"VWL\"",
             "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n\t\"matrikelnr\": 112233,\n\t\"vorname\": \"Max\",\n\t\"nachname\": \"Mustermann\",\n\t\"studiengang\": \"LUD\"\n},"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/studi/"
+            },
+            "id": "9e69c11b-396d-4fca-a3c6-559347a6c016",
+            "name": "POST Collection Studi \"Max Mustermann\"",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
           }
         }
       ]
