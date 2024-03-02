@@ -299,6 +299,6 @@ async function patchResource(req, res) {
     } else {
 
         res.status( HTTP_STATUS_CODES.OK_200 );
-        res.json( neuObjekt );
+        res.json( ergebnisObjekt );
     }
 }
