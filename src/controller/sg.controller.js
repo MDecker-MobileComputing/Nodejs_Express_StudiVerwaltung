@@ -45,6 +45,14 @@ export default function routenRegistrieren(app) {
     logger.info(`Route registriert: POST ${routeCollection}`);
     anzahlRestEndpunkte++;
 
+    /*
+    // Handler-Funktion für alle nicht explizit registrierten HTTP-Verben.
+    // ACHTUNG: HTTP-OPTIONS funktioniert dann nicht mehr ohne es
+    //          explizit zu registrieren.
+    app.all(routeCollection, httpVerbNichtUnterstuetzt);
+    app.all(routeRessource , httpVerbNichtUnterstuetzt);
+    */
+
     return anzahlRestEndpunkte;
 };
 
@@ -154,4 +162,3 @@ async function postCollection(req, res) {
         res.json( {} );
     }
 }
-

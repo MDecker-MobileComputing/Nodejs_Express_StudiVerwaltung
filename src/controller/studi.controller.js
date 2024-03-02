@@ -48,11 +48,9 @@ export default function routenRegistrieren(app) {
     logger.info(`Route registriert: DELETE ${routeRessource}`);
     anzahlRestEndpunkte++;
 
-    /*
-    app.patch( routeCollection, patchResource );
-    logger.info(`Route registriert: PATCH ${routeCollection}`);
+    app.patch( routeRessource, patchResource );
+    logger.info(`Route registriert: PATCH ${routeRessource}`);
     anzahlRestEndpunkte++;
-    */
 
     // HTTP-PUT wird nicht implementiert, weil es nicht sinnvoll ist,
     // einfach ein ganzes Studi-Objekt zu ersetzen.
@@ -238,6 +236,27 @@ async function deleteResource(req, res) {
 }
 
 
+/**
+ * Einzelne Felder einer Studi-Ressource ändern.
+ */
 function patchResource(req, res) {
+
+    const matrikenrStr = req.params.matrikelnr;
+
+    // versuche, die matrikelnummer zu parsen
+    let matrikelnrInt = parseInt(matrikenrStr);
+
+    if ( isNaN(matrikelnrInt) ) {
+
+        logger.error(`Pfadparameterwert "${matrikenrStr}" konnte nicht nach Int geparst werden.`);
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Matrikelnummer muss eine ganze Zahl (Integer) sein.");
+        res.status(HTTP_STATUS_CODES.BAD_REQUEST_400);
+        res.json( {} );
+        return;
+    }
+
+    // http response für "not implemented" zurückgeben
+    res.status( 501 );
+    res.json( {} );
 
 }
