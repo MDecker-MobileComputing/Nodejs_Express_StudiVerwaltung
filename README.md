@@ -8,6 +8,8 @@
 
 <br>
 
-`GET` auf Ressourcen beinhaltet auch die Volltextsuche mit URL-Parameter `q` (für "query").
+`GET` auf Collections beinhaltet auch die Volltextsuche mit URL-Parameter `q` (für "query"), z.B.:
+* `/api/v1/sg/?q=medien`
+* `/api/v1/studi/?q=meyer`
 
 <br>

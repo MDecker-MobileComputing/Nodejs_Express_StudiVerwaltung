@@ -231,7 +231,8 @@ async function deleteResource(req, res) {
 
     } else {
 
-        res.setHeader(CUSTOM_HEADER_FEHLER, `Löschen fehlgeschlagen, kein Studi mit dieser Matrikelnummer ${matrikelnrInt} gefunden.`);
+        res.setHeader(CUSTOM_HEADER_FEHLER,
+                      `Löschen fehlgeschlagen, kein Studi mit dieser Matrikelnummer ${matrikelnrInt} gefunden.`);
         res.status( HTTP_STATUS_CODES.NOT_FOUND_404 );
         res.json( {} );
     }
@@ -240,6 +241,7 @@ async function deleteResource(req, res) {
 
 function putResource(req, res) {
 }
+
 
 function patchResource(req, res) {
 }
