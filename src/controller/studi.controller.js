@@ -287,11 +287,12 @@ async function patchResource(req, res) {
     }
 
 
-    const neuObjekt = await studiService.aendern(matrikelnrInt, deltaObjekt);
+    const ergebnisObjekt = await studiService.aendern(matrikelnrInt, deltaObjekt);
 
-    if (neuObjekt === null) {
+    if (ergebnisObjekt.fehler) {
 
         res.status( HTTP_STATUS_CODES.NOT_FOUND_404 );
+        res.setHeader(CUSTOM_HEADER_FEHLER, ergebnisObjekt.fehler);
         res.json( {} );
         return;
 
