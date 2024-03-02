@@ -12,6 +12,38 @@
           "entity": {
             "type": "Request",
             "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+              "name": "DELETE"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/studi/123456"
+            },
+            "id": "fbf8851e-1886-42e8-8091-90fa8ddaca86",
+            "name": "DELETE Ressource Studi 123456",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
               "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
               "name": "GET"
             },
@@ -287,38 +319,6 @@
                 "version": "V11"
               },
               "host": "localhost:8080",
-              "path": "/api/v1/studi/asdf"
-            },
-            "id": "7b64d5fe-abd7-493a-8d2b-152f855131c2",
-            "name": "GET Collection Studi Query 123456",
-            "headers": []
-          }
-        },
-        {
-          "entity": {
-            "type": "Request",
-            "method": {
-              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-              "name": "GET"
-            },
-            "body": {
-              "formBody": {
-                "overrideContentType": true,
-                "encoding": "application/x-www-form-urlencoded",
-                "items": []
-              },
-              "bodyType": "Text"
-            },
-            "uri": {
-              "query": {
-                "delimiter": "&",
-                "items": []
-              },
-              "scheme": {
-                "name": "http",
-                "version": "V11"
-              },
-              "host": "localhost:8080",
               "path": "/api/v1/sg/ABC"
             },
             "id": "259b0e46-31fd-4dac-8c96-f41eb7369da7",
@@ -362,6 +362,38 @@
           "entity": {
             "type": "Request",
             "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/studi/123456"
+            },
+            "id": "7b64d5fe-abd7-493a-8d2b-152f855131c2",
+            "name": "GET Ressource Studi 123456",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
               "link": "http://tools.ietf.org/html/rfc7231#section-4.3.7",
               "name": "OPTIONS"
             },
@@ -387,6 +419,38 @@
             },
             "id": "ecc7c569-c25b-4d18-9a43-9f368ed9ff3d",
             "name": "OPTIONS Collection SG",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.7",
+              "name": "OPTIONS"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/studi/"
+            },
+            "id": "fd527e83-8858-4482-a90f-b555a81785cf",
+            "name": "OPTIONS Collection STUDIS",
             "headers": []
           }
         },
@@ -478,7 +542,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n\t\"matrikelnr\": 112233,\n\t\"vorname\": \"Max\",\n\t\"nachname\": \"Mustermann\",\n\t\"studiengang\": \"LUD\"\n},"
+              "textBody": "{\n\t\"matrikelnr\": 112233,\n\t\"vorname\": \"Max\",\n\t\"nachname\": \"Mustermann\",\n\t\"studiengang\": \"LUD\"\n}"
             },
             "uri": {
               "query": {

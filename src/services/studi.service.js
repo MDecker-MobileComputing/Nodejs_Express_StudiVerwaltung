@@ -132,6 +132,40 @@ async function neu(studiObjekt) {
 
 
 /**
+ * Studi anhand von Matrikelnummer löschen. Es wird zuerst geprüft, ob es überhaupt
+ * einen Studi mit der als Argument übergebenen Matrikelnummer gibt.
+ *
+ * @param {number} matrikelnr Matrikelnummer von Studi, der gelöscht werden soll.
+ *
+ * @returns {boolean} `true`, wenn Studi gelöscht wurde, sonst `false`(weil kein Studi mit `matrinr`
+ *                    gefunden wurde).
+ */
+async function loeschen(matrikelnr) {
+
+    const studiGefunden = getByMatrikelnr(matrikelnr);
+    if (!studiGefunden) {
+
+        logger.warn(`Löschen fehlgeschlagen, kein Studi mit Matrikelnummer ${matrikelnr} gefunden.`);
+        return false;
+    }
+
+    await datenbankObjekt.studiLoeschen(matrikelnr);
+
+    logger.info(`Studi mit Matrinr ${matrikelnr} gelöscht: `+
+                `${studiGefunden.vorname} ${studiGefunden.nachname} - ${studiGefunden.studiengang}`);
+
+    return true;
+}
+
+
+/**
  * Alle Funktionen als Objekt exportieren.
  */
-export default { getAlle, suche, getByMatrikelnr, neu };
+export default {
+
+    // Lese-Funktionen
+    getAlle, suche, getByMatrikelnr,
+
+    // Schreib-Funktionen
+    neu, loeschen
+};

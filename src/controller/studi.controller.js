@@ -44,10 +44,11 @@ export default function routenRegistrieren(app) {
     logger.info(`Route registriert: POST ${routeCollection}`);
     anzahlRestEndpunkte++;
 
-    app.delete( routeCollection, deleteResource );
-    logger.info(`Route registriert: DELETE ${routeCollection}`);
+    app.delete( routeRessource, deleteResource );
+    logger.info(`Route registriert: DELETE ${routeRessource}`);
     anzahlRestEndpunkte++;
 
+    /*
     app.put( routeCollection, putResource );
     logger.info(`Route registriert: PUT ${routeCollection}`);
     anzahlRestEndpunkte++;
@@ -55,6 +56,7 @@ export default function routenRegistrieren(app) {
     app.patch( routeCollection, patchResource );
     logger.info(`Route registriert: PATCH ${routeCollection}`);
     anzahlRestEndpunkte++;
+    */
 
     return anzahlRestEndpunkte;
 };
@@ -62,6 +64,7 @@ export default function routenRegistrieren(app) {
 
 // Namenskonvention für Funktionen, die HTTP-Requests verarbeiten:
 // [GET|POST|PUT|...][Ressource|Collection]
+
 
 /**
  * Funktion HTTP-GET-Request auf eine Ressource mit Matrikelnr
@@ -200,8 +203,40 @@ async function postCollection(req, res) {
 }
 
 
-function deleteResource(req, res) {
+/**
+ * Funktion für HTTP-DELETE zu Studi-Ressource, also um Studi zu löschen.
+ */
+async function deleteResource(req, res) {
+
+    const matrikenrStr = req.params.matrikelnr;
+
+    // versuche, die matrikelnummer zu parsen
+    let matrikelnrInt = parseInt(matrikenrStr);
+
+    if ( isNaN(matrikelnrInt) ) {
+
+        logger.error(`Pfadparameterwert "${matrikenrStr}" konnte nicht nach Int geparst werden.`);
+        res.setHeader(CUSTOM_HEADER_FEHLER, "Matrikelnummer muss eine ganze Zahl (Integer) sein.");
+        res.status(HTTP_STATUS_CODES.BAD_REQUEST_400);
+        res.json( {} );
+        return;
+    }
+
+    const erfolgreich = await studiService.loeschen(matrikelnrInt);
+
+    if (erfolgreich) {
+
+        res.status( HTTP_STATUS_CODES.NO_CONTENT_204 );
+        res.json( {} );
+
+    } else {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER, `Löschen fehlgeschlagen, kein Studi mit dieser Matrikelnummer ${matrikelnrInt} gefunden.`);
+        res.status( HTTP_STATUS_CODES.NOT_FOUND_404 );
+        res.json( {} );
+    }
 }
+
 
 function putResource(req, res) {
 }

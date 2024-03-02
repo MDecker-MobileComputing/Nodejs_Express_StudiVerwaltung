@@ -135,6 +135,9 @@ async function studiengangNeu(sgObjekt) {
 
     datenbank.data.studiengaenge.push(sgObjekt)
     await datenbank.write();
+
+    logger.info(`Anzahl Studiengänge nach Anlegen neuer Studiengang "${sgObjekt.kurz}": ` +
+                `${datenbank.data.studiengaenge.length}`);
 }
 
 
@@ -151,6 +154,25 @@ async function studiNeu(studiObjekt) {
 
     datenbank.data.studis.push(studiObjekt)
     await datenbank.write();
+
+    logger.info(`Anzahl Studis nach Anlegen neuer Studi: ${datenbank.data.studis.length}`);
+}
+
+
+/**
+ * Studierenden anhand Matrikelnummer löschen.
+ *
+ * @param {*} matrikelnr Matrikelnummer von zu löschemden studi.
+ */
+async function studiLoeschen(matrikelnr)  {
+
+    const filterFkt = (studi) => studi.matrikelnr !== matrikelnr;
+
+    datenbank.data.studis = datenbank.data.studis.filter( filterFkt );
+
+    await datenbank.write();
+
+    logger.info(`Anzahl Studis nach Löschen: ${datenbank.data.studis.length}`);
 }
 
 
@@ -160,6 +182,8 @@ async function studiNeu(studiObjekt) {
 export default {
 
     initialisieren,
+
     studiengangGetAlle, studiengangNeu,
-    studiGetAlle, studiNeu
+
+    studiGetAlle, studiNeu, studiLoeschen
 };
