@@ -197,13 +197,12 @@ async function studiLoeschen(matrikelnr)  {
 async function studiAendern(matrikelnr, deltaObjekt) {
 
     let studiObjekt = null;
-    for (let i=0; i<datenbank.data.studis.length; i++) {
+    for (let i=0; i < datenbank.data.studis.length; i++) {
 
         if (datenbank.data.studis[i].matrikelnr === matrikelnr) {
 
             studiObjekt = datenbank.data.studis[i];
             break;
-
         }
     }
 
