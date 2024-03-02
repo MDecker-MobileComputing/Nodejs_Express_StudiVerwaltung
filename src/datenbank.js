@@ -79,27 +79,8 @@ async function initialisieren() {
 // Namenskonvention: Alle Funktionen für den Zugriff auf die Datenbank
 //                   müssen mit dem Namen des Entitätstyps beginnen,
 //                   also entweder "studiengang..." oder "studi...".
-
-
-/**
- * Alle Studierenden von Datenbank holen.
- *
- * @returns Array mit allen Studierenden, sortiert nach aufsteigenden
- *          Matrikelnummer; wird nicht `null` oder `undefined` sein.
- */
-function studiGetAlle() {
-
-    if (datenbank.data && datenbank.data.studis) {
-
-        const sortFkt = (a, b) => a.matrikelnr - b.matrikelnr;
-
-        return datenbank.data.studis.sort(sortFkt);
-
-    } else {
-
-        return [];
-    }
-}
+//                   Erst kommen die Funktionen für die Studiengänge,
+//                   dann die für die Studierenden.
 
 
 /**
@@ -139,6 +120,28 @@ async function studiengangNeu(sgObjekt) {
 
     logger.info(`Anzahl Studiengänge nach Anlegen neuer Studiengang "${sgObjekt.kurz}": ` +
                 `${datenbank.data.studiengaenge.length}`);
+}
+
+
+
+/**
+ * Alle Studierenden von Datenbank holen.
+ *
+ * @returns Array mit allen Studierenden, sortiert nach aufsteigenden
+ *          Matrikelnummer; wird nicht `null` oder `undefined` sein.
+ */
+function studiGetAlle() {
+
+    if (datenbank.data && datenbank.data.studis) {
+
+        const sortFkt = (a, b) => a.matrikelnr - b.matrikelnr;
+
+        return datenbank.data.studis.sort(sortFkt);
+
+    } else {
+
+        return [];
+    }
 }
 
 
