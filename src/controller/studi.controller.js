@@ -49,14 +49,13 @@ export default function routenRegistrieren(app) {
     anzahlRestEndpunkte++;
 
     /*
-    app.put( routeCollection, putResource );
-    logger.info(`Route registriert: PUT ${routeCollection}`);
-    anzahlRestEndpunkte++;
-
     app.patch( routeCollection, patchResource );
     logger.info(`Route registriert: PATCH ${routeCollection}`);
     anzahlRestEndpunkte++;
     */
+
+    // HTTP-PUT wird nicht implementiert, weil es nicht sinnvoll ist,
+    // einfach ein ganzes Studi-Objekt zu ersetzen.
 
     return anzahlRestEndpunkte;
 };
@@ -239,9 +238,6 @@ async function deleteResource(req, res) {
 }
 
 
-function putResource(req, res) {
-}
-
-
 function patchResource(req, res) {
+
 }
