@@ -132,6 +132,51 @@ async function neu(studiObjekt) {
 
 
 /**
+ * Einzelne Attribute in Studi-Objekt ändern
+ * (Matrikelnummer ist Schlüssel und kann daher nicht geändert werden).
+ *
+ * @param {*} matrikelnr  Matrikelnummer von Studi, für den Änderungen vorgenommen werden sollen.
+ *
+ * @param {*} deltaObjekt Objekt mit neuen Werten von Attributen, die geändert werden sollen.
+ *                        Es muss mindestens ein Attribut enthalten.
+ *
+ * @returns Studi-Objekt mit geänderten Attributen oder Objekt mit `fehler`-Attribut,
+ *          wenn die Änderung nicht erfolgreich war.
+ */
+async function aendern(matrikelnr, deltaObjekt) {
+
+    const studiGefunden = getByMatrikelnr(matrikelnr);
+    if (studiGefunden === false) {
+
+        logger.warn(`Ändern fehlgeschlagen, kein Studi mit Matrikelnummer ${matrikelnr} gefunden.`);
+        return { "fehler": `Kein Studi mit Matrikelnummer ${matrikelnr} gefunden.` };
+    }
+
+    if (deltaObjekt.studiengang) {
+
+        const sgObjekt = sgService.getByKurzname(deltaObjekt.studiengang);
+        if (!sgObjekt) {
+
+            logger.warn(`Ändern fehlgeschlagen, Studiengang "${deltaObjekt.studiengang}" existiert nicht.`);
+            return { "fehler": `Studiengang "${deltaObjekt.studiengang}" existiert nicht.` };
+        }
+    }
+
+    const ergebnisObjekt = await datenbankObjekt.studiAendern(matrikelnr, deltaObjekt);
+
+    if (ergebnisObjekt === null) {
+
+        logger.warn(`Ändern fehlgeschlagen, kein Studi mit Matrikelnummer ${matrikelnr} gefunden.`);
+        return { "fehler": `Kein Studi mit Matrikelnummer ${matrikelnr} gefunden.` };
+
+    } else {
+
+        return ergebnisObjekt;
+    }
+}
+
+
+/**
  * Studi anhand von Matrikelnummer löschen. Es wird zuerst geprüft, ob es überhaupt
  * einen Studi mit der als Argument übergebenen Matrikelnummer gibt.
  *
@@ -167,5 +212,5 @@ export default {
     getAlle, suche, getByMatrikelnr,
 
     // Schreib-Funktionen
-    neu, loeschen
+    neu, loeschen, aendern
 };

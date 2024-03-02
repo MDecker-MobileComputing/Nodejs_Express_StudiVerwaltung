@@ -149,7 +149,6 @@ async function postCollection(req, res) {
         res.json( {} );
         return;
     }
-
     if (vorname === undefined || vorname.trim() === "" ) {
 
         res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'vorname' fehlt oder ist leer");
@@ -157,7 +156,6 @@ async function postCollection(req, res) {
         res.json( {} );
         return;
     }
-
     if (nachname === undefined || nachname.trim() === "" ) {
 
         res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'nachname' fehlt oder ist leer");
@@ -165,7 +163,6 @@ async function postCollection(req, res) {
         res.json( {} );
         return;
     }
-
     if (studiengang === undefined || studiengang.trim() === "" ) {
 
         res.setHeader(CUSTOM_HEADER_FEHLER, "Attribut 'studiengang' fehlt oder ist leer");
@@ -238,8 +235,11 @@ async function deleteResource(req, res) {
 
 /**
  * Einzelne Felder einer Studi-Ressource ändern.
+ * Im JSON-Body muss mindestens ein neuer Wert für eines
+ * der folgenden Attribute enthalten sein:
+ * `vorname`, `nachname`, `studiengang`.
  */
-function patchResource(req, res) {
+async function patchResource(req, res) {
 
     const matrikenrStr = req.params.matrikelnr;
 
@@ -255,8 +255,49 @@ function patchResource(req, res) {
         return;
     }
 
-    // http response für "not implemented" zurückgeben
-    res.status( 501 );
-    res.json( {} );
+    const vorname     = req.body.vorname;
+    const nachname    = req.body.nachname;
+    const studiengang = req.body.studiengang;
 
+    const deltaObjekt = {};
+
+    let einAttributGeaendert = false;
+    if (vorname && vorname.trim().length > 0 ) {
+
+        einAttributGeaendert = true;
+        deltaObjekt.vorname = vorname.trim();
+    }
+    if (nachname && nachname.trim().length > 0 ) {
+
+        einAttributGeaendert = true;
+        deltaObjekt.nachname = nachname.trim();
+    }
+    if (studiengang && studiengang.trim().length > 0 ) {
+
+        einAttributGeaendert = true;
+        deltaObjekt.studiengang = studiengang.trim().toUpperCase();
+    }
+    if (einAttributGeaendert === false) {
+
+        res.setHeader(CUSTOM_HEADER_FEHLER,
+                      "Es muss mindestens ein Attribut mit neuem Wert im JSON-Body enthalten sein.");
+        res.status(HTTP_STATUS_CODES.BAD_REQUEST_400);
+        res.json( {} );
+        return;
+    }
+
+
+    const neuObjekt = await studiService.aendern(matrikelnrInt, deltaObjekt);
+
+    if (neuObjekt === null) {
+
+        res.status( HTTP_STATUS_CODES.NOT_FOUND_404 );
+        res.json( {} );
+        return;
+
+    } else {
+
+        res.status( HTTP_STATUS_CODES.OK_200 );
+        res.json( neuObjekt );
+    }
 }

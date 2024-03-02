@@ -6,8 +6,9 @@ const logger = logging.default("datenbank");
 
 const dbDateiName = "db.json"; // diese Datei in .gitignore und Ingore-Liste für nodemon aufnehmen
 
-
+// Anfangsdaten, wenn die Datenbank-Datei nicht existiert
 const anfangsDaten =  {
+
     "studiengaenge": [
        {
         "kurz": "BWL",
@@ -177,6 +178,61 @@ async function studiLoeschen(matrikelnr)  {
 
 
 /**
+ * Ändert ausgewählte Eigenschaften eines Studierenden.
+ *
+ * @param {number} matrikelnr Matrkelnummer des zu ändernden Studis; es muss
+ *                            vorher überprüft werden, dass ein Studi mit
+ *                            dieser Matrikelnummer existiert.
+ *
+ * @param {*} deltaObjekt Objekt mit neuen Werten für den Studi; die Werte
+ *                        müssen schon normalisiert sein und der Studiengang
+ *                        (falls enthalten) muss existieren.
+ *
+ * @return {object} Geändertes Studi-Objekt oder `null`, wenn kein Studi
+ *                  mit der Matrikelnummer gefunden wurde.
+ */
+async function studiAendern(matrikelnr, deltaObjekt) {
+
+    let studiObjekt = null;
+    for (let i=0; i<datenbank.data.studis.length; i++) {
+
+        if (datenbank.data.studis[i].matrikelnr === matrikelnr) {
+
+            studiObjekt = datenbank.data.studis[i];
+            break;
+
+        }
+    }
+
+    if (studiObjekt === null) {
+
+        logger.error(`INTERNER FEHLER: Kein Studi mit Matrikelnr "${matrikelnr}" gefunden.`);
+        return null;
+    }
+
+    if (deltaObjekt.vorname) {
+
+        studiObjekt.vorname = deltaObjekt.vorname;
+        logger.info(`Vorname von Studi ${matrikelnr} geändert: ${studiObjekt.vorname}`);
+    }
+    if (deltaObjekt.nachname) {
+
+        studiObjekt.nachname = deltaObjekt.nachname;
+        logger.info(`Nachname von Studi ${matrikelnr} geändert: ${studiObjekt.nachname}`);
+    }
+    if (deltaObjekt.studiengang) {
+
+        studiObjekt.studiengang = deltaObjekt.studiengang;
+        logger.info(`Studiengang von Studi ${matrikelnr} geändert: ${studiObjekt.studiengang}`);
+    }
+
+    await datenbank.write();
+
+    return studiObjekt;
+}
+
+
+/**
  * Alle Funktionen mit Default-Objekt exportieren.
  */
 export default {
@@ -185,5 +241,5 @@ export default {
 
     studiengangGetAlle, studiengangNeu,
 
-    studiGetAlle, studiNeu, studiLoeschen
+    studiGetAlle, studiNeu, studiLoeschen, studiAendern
 };
