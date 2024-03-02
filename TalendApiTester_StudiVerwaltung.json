@@ -459,6 +459,86 @@
             "type": "Request",
             "method": {
               "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc5789",
+              "name": "PATCH"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"vorname\": \"Hänschen\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/studi/123456"
+            },
+            "id": "5ee754de-73c1-4c13-9d22-cad82224a0c9",
+            "name": "PATCH Ressource Studi 123456",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc5789",
+              "name": "PATCH"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"nachname\": \"Wiwi\",\n  \"studiengang\": \"BWL\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:8080",
+              "path": "/api/v1/studi/234567"
+            },
+            "id": "88431185-3966-444e-a8fb-d8b9bb8fc2fe",
+            "name": "PATCH Ressource Studi 234567",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
               "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
               "name": "POST"
             },
