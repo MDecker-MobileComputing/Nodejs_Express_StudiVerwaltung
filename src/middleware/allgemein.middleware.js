@@ -41,7 +41,7 @@ function mwCatchIllegalJson(err, req, res, next) {
     if (err instanceof SyntaxError) {
 
         logger.error("Illegal JSON in HTTP-Request: " + err );
-        res.status(400).send("Bad Request: Invalid JSON");
+        res.status(400).send("Bad Request: JSON-Body kein gültiges JSON.");
 
     } else {
 
