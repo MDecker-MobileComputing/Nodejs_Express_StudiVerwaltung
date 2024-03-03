@@ -17,7 +17,7 @@ function getAlle() {
 
     const ergebnisArray = datenbankObjekt.studiengangGetAlle();
 
-    logger.info("Anzahl Studiengänge ausgelesen: " + ergebnisArray.length)
+    logger.info("Anzahl Studiengänge ausgelesen: " + ergebnisArray.length);
 
     return ergebnisArray;
 }
