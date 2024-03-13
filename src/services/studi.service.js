@@ -196,7 +196,7 @@ async function loeschen(matrikelnr) {
 
     await datenbankObjekt.studiLoeschen(matrikelnr);
 
-    logger.info(`Studi mit Matrinr ${matrikelnr} gelöscht: `+
+    logger.info(`Studi mit Matrikelnummer ${matrikelnr} gelöscht: `+
                 `${studiGefunden.vorname} ${studiGefunden.nachname} - ${studiGefunden.studiengang}`);
 
     return true;
