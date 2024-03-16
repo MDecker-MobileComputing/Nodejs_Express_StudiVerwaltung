@@ -142,7 +142,7 @@ async function studiengangLangnameAendern(kurzname, langname) {
 
     if (studiengang) {
 
-        studiengang.langname = langname;
+        studiengang.lang = langname;
         await datenbank.write();
 
         logger.info(`Langname von Studiengang "${kurzname}" geändert: ${langname}`);
