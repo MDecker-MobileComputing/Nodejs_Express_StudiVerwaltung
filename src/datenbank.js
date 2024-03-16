@@ -123,6 +123,41 @@ async function studiengangNeu(sgObjekt) {
 }
 
 
+/**
+ * Neuen Langnamen für einen Studiengang setzen. Die Funktion darf nur aufgerufen
+ * werden, wenn vorher sichergestellt wurde, dass es einen Studiengang mit dem
+ * Kurznamen gibt.
+ *
+ * @param {*} kurzname Kurzname (Schlüssel) des Studiengangs, für den der Langname
+ *                     geändert werden soll.
+ *
+ * @param {*} langname Neuer Langname, der für den Studiengang gespeichert werden soll.
+ *
+ * @return {object} Geändertes Studiengang-Objekt oder leeres Objekt, wenn kein
+ *                  Studiengang mit dem Kurznamen gefunden wurde.
+ */
+async function studiengangLangnameAendern(kurzname, langname) {
+
+    const studiengang = datenbank.data.studiengaenge.find( (sg) => sg.kurz === kurzname );
+
+    if (studiengang) {
+
+        studiengang.langname = langname;
+        await datenbank.write();
+
+        logger.info(`Langname von Studiengang "${kurzname}" geändert: ${langname}`);
+
+        return studiengang;
+
+    } else {
+
+        logger.error(`INTERNER FEHLER: Kein Studiengang mit Kurzname "${kurzname}" gefunden.`);
+        return {};
+    }
+}
+
+
+// ****** ab jetzt die Funktionen für die Studi-Datensätze ******
 
 /**
  * Alle Studierenden von Datenbank holen.
@@ -241,7 +276,7 @@ export default {
 
     initialisieren,
 
-    studiengangGetAlle, studiengangNeu,
+    studiengangGetAlle, studiengangNeu, studiengangLangnameAendern,
 
     studiGetAlle, studiNeu, studiLoeschen, studiAendern
 };

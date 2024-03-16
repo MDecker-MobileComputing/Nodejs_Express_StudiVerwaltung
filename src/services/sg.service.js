@@ -119,6 +119,32 @@ async function neu(sgObjekt) {
 
 
 /**
+ * Langname eines Studiengangs ändern.
+ *
+ * @param {*} kurzname Kürzel (Schlüssel) des Studiengangs, für den der Langname
+ *                     geändert werden soll.
+ *
+ * @param {*} langname Neuer Langname, der für den Studiengang gespeichert werden soll.
+ *
+ * @returns {object} Objekt mit geändertem Studiengang oder `null`, wenn kein Studiengang mit
+ *                   dem Kurznamen gefunden wurde.
+ */
+async function langnameAendern(kurzname, langname) {
+
+    const sgObj = getByKurzname(kurzname);
+    if (!sgObj) {
+
+        logger.error(`Änderung Langname für unbekannten Studiengang "${kurzname}" angefordert.`);
+        return null;
+    }
+
+    await datenbankObjekt.studiengangLangnameAendern(kurzname, langname);
+
+    return sgObj;
+}
+
+
+/**
  * Alle Funktionen als Objekt exportieren.
  */
-export default { getAlle, suche, getByKurzname, neu };
+export default { getAlle, suche, getByKurzname, neu, langnameAendern };
