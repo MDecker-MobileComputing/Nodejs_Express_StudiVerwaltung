@@ -9,8 +9,8 @@
 
 <br>
 
-Die Operaiton `GET` auf den Collections beinhaltet auch die Volltextsuche mit URL-Parameter `q` (für "query"), z.B.:
-* `/api/v1/sg/?q=medien`
+Die Operation `GET` auf den Collections beinhaltet auch die Volltextsuche mit URL-Parameter `q` (für "query"), z.B.:
+* `/api/v1/sg/?q=wirtschaft`
 * `/api/v1/studi/?q=meyer`
 
 <br>
