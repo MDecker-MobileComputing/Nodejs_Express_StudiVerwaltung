@@ -14,3 +14,16 @@ Die Operation `GET` auf den Collections beinhaltet auch die Volltextsuche mit UR
 * `/api/v1/studi/?q=meyer`
 
 <br>
+
+
+----
+
+## License ##
+
+<br>
+
+See the [LICENSE file](LICENSE.md) for license rights and limitations (BSD 3-Clause License)
+for the files in this repository.
+
+<br>
+
