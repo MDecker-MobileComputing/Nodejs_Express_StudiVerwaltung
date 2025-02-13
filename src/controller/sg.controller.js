@@ -108,13 +108,13 @@ function getCollection(req, res) {
 
     if (anzahl === 0) {
 
-            res.status(HTTP_STATUS_CODES.NOT_FOUND_404);
-            res.json( [] );
+        res.status(HTTP_STATUS_CODES.NOT_FOUND_404);
+        res.json( [] );
 
     } else {
 
-            res.status( HTTP_STATUS_CODES.OK_200 );
-            res.json( ergebnisArray );
+        res.status( HTTP_STATUS_CODES.OK_200 );
+        res.json( ergebnisArray );
     }
 }
 
@@ -157,7 +157,7 @@ async function postCollection(req, res) {
 
     } else {
 
-        res.setHeader(CUSTOM_HEADER_FEHLER, "Studienrichtung mit diesem Kurznamen existierte bereits.");
+        res.setHeader( CUSTOM_HEADER_FEHLER, "Studienrichtung mit diesem Kurznamen existierte bereits." );
         res.status( HTTP_STATUS_CODES.CONFLICT_409 );
         res.json( {} );
     }

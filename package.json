@@ -5,16 +5,16 @@
     "author": "MDecker-MobileComputing",
     "license": "BSD-3-Clause",
     "type": "module",
-    "dependencies": {
-      "express": "^4.18.2",
-      "logging": "^3.3.0",
-      "lowdb": "^7.0.1"
-    },
     "devDependencies": {
-      "nodemon": "^3.1.0"
+        "nodemon": "^3.1.9"
     },
     "scripts": {
-      "start": "node src/main.js",
-      "watch": "nodemon --ignore db.json src/main.js"
+        "start": "node src/main.js",
+        "watch": "nodemon --ignore db.json src/main.js"
+    },
+    "dependencies": {
+        "express": "^4.21.2",
+        "logging": "^3.3.0",
+        "lowdb": "^7.0.1"
     }
-  }
+}
