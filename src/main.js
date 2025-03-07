@@ -1,9 +1,9 @@
 import express from "express";
 import logging from "logging";
 
-import datenbankObjekt  from "./datenbank.js";
-import controllerArray  from "./controller/index.js";
-import middlewareArray  from "./middleware/allgemein.middleware.js";
+import datenbankObjekt from "./datenbank.js";
+import controllerArray from "./controller/index.js";
+import middlewareArray from "./middleware/allgemein.middleware.js";
 
 
 const logger = logging.default("main");
